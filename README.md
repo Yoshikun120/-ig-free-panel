@@ -1,18 +1,16 @@
-# IG FREE — เว็บปั๊มไลก์ฟรี
+# IG FREE
 
-โปรเจกต์นี้มีหน้าเว็บและ API serverless สำหรับส่งคำสั่งไปยัง AUTO-TH โดยเก็บ API Key ไว้ใน Environment Variables ฝั่งเซิร์ฟเวอร์ ไม่ใส่คีย์ในหน้าเว็บ
+เว็บตัวอย่างสำหรับส่งคำสั่ง Instagram Likes ผ่าน AUTO-TH โดยเก็บ API key ไว้ฝั่งเซิร์ฟเวอร์ของ Vercel
 
-## Deploy บน Vercel
-1. อัปโหลดโฟลเดอร์นี้ขึ้น GitHub
-2. Import repository เข้า Vercel
-3. ตั้ง Environment Variables:
-   - `AUTO_TH_API_KEY` = API Key ของบัญชีคุณ
-   - `FREE_SERVICE_ID` = Service ID ของบริการ Instagram Likes ที่คุณต้องการให้ใช้ฟรี (คั่นหลาย ID ด้วย comma ได้)
-   - `FREE_QUANTITY` = จำนวนเริ่มต้น เช่น `100`
-4. Redeploy
-5. เปิดเว็บจากโดเมน Vercel
+## Environment Variable
+ตั้งค่าใน Vercel Project Settings → Environment Variables:
 
-## สำคัญ
-API ของ AUTO-TH ใช้ POST ที่ `https://auto-th.com/api/v2` และรองรับ `services`, `add`, `status` ฯลฯ ตามเอกสารของผู้ให้บริการ คุณต้องเลือก Service ID ที่บัญชีของคุณใช้งานได้เองก่อน
+- `AUTO_TH_API_KEY` = API key ของ AUTO-TH
 
-GitHub Pages อย่างเดียวไม่ควรใช้กับ API Key เพราะคีย์จะถูกเปิดเผยใน JavaScript ฝั่งผู้ใช้
+ไม่ต้องตั้ง `FREE_SERVICE_ID` แล้ว ระบบจะเรียก `action=services` และค้นหาบริการที่ชื่อสื่อว่า Instagram + Likes อัตโนมัติ
+
+## หมายเหตุ
+- ผู้ใช้ปลายทางไม่ต้องใส่รหัสผ่าน Instagram
+- จำนวนเริ่มต้น 100 และระบบจะปรับให้อยู่ใน min/max ของบริการที่เลือกอัตโนมัติ
+- ค่าใช้บริการ/ยอดเงินของบัญชี AUTO-TH ขึ้นอยู่กับผู้ให้บริการ แม้หน้าเว็บจะให้ผู้ใช้กดฟรี
+- หลังแก้ Environment Variables ให้ Redeploy โปรเจกต์เพื่อให้ค่ามีผล
